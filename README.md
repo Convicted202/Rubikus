@@ -2,6 +2,14 @@
 
 > A full blown **React-native iOS app** that can scan 2x2x2 and 3x3x3 Rubik's cubes using your phone's camera, render it in 3D and then provide a solution.
 
+## Real world example (shot on iPhone 12 Pro)
+
+[![Rubikus demo](https://img.youtube.com/vi/iPII7uQOGMM/1.jpg)](https://youtu.be/iPII7uQOGMM)
+
+## How it works
+
+---
+
 The provided solution is found based on two algorithms:
 
 - **Two-directional Bread-First Search** for 2x2x2
@@ -17,9 +25,9 @@ It also uses wonderful [react-native-vision-camera](https://github.com/mrousavy/
 
 CIE color space is used for color manipulations, color diff computation ([CIEDE2000](https://en.wikipedia.org/wiki/Color_difference#CIEDE2000))
 
----
-
 ## Libraries and Frameworks used:
+
+---
 
 - [React Native](https://reactnative.dev/)
 - [Apple Vision Framework](https://developer.apple.com/documentation/vision)

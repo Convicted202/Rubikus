@@ -1,3 +1,5 @@
+import { SolutionGenerationError } from '../utils/errors';
+
 type vi = Array<number>;
 
 const toId = (v: vi) => v.toString();
@@ -141,7 +143,7 @@ export class ThistlethwaiteSolver {
       sum += edge;
     });
     if (sum % 2 !== 0) {
-      throw new Error('Cannot solve: Edges not oriented correctly.');
+      throw new SolutionGenerationError('Cannot solve: Edges not oriented correctly.');
     }
     sum = 0;
     //orientation of corners
@@ -150,7 +152,7 @@ export class ThistlethwaiteSolver {
     });
     if (sum % 3 !== 0) {
       //corner orientation
-      throw new Error('Cannot solve: Corners not oriented correctly.');
+      throw new SolutionGenerationError('Cannot solve: Corners not oriented correctly.');
     }
 
     var getParity = function (a: number[]) {
@@ -174,7 +176,7 @@ export class ThistlethwaiteSolver {
     //corner parity
     sum += getParity(this.currentState.slice(12, 20));
     if (sum % 2 !== 0) {
-      throw new Error('Cannot solve: Parity error only one set of corners or edges swapped.');
+      throw new SolutionGenerationError('Cannot solve: Parity error only one set of corners or edges swapped.');
     }
 
     return true;
@@ -182,7 +184,7 @@ export class ThistlethwaiteSolver {
 
   prepare(cubicles: string[]) {
     if (cubicles.length !== 20) {
-      throw new Error('Not enough cubies provided.');
+      throw new SolutionGenerationError('Not enough cubies provided.');
     }
 
     //--- Define the goal.
@@ -204,7 +206,7 @@ export class ThistlethwaiteSolver {
 
         // orientation can only be 0 | 1 for edges and 0 | 1 | 2 for corners
         if (this.currentState[i + 20] > 2) {
-          throw new Error('Cannot solve: Invalid painting of cube.');
+          throw new SolutionGenerationError('Cannot solve: Invalid painting of cube.');
         }
       }
       goal[goal.indexOf(cubie)] = '';

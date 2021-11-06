@@ -1,3 +1,5 @@
+import { SolutionGenerationError } from '../utils/errors';
+
 const dup = <T>(el: T, count: number) => Array(count).fill(el).join('');
 
 // http://codegolf.stackexchange.com/questions/35002/solve-the-rubiks-pocket-cube
@@ -5,18 +7,9 @@ const dup = <T>(el: T, count: number) => Array(count).fill(el).join('');
 export class BFS2x2Solver {
   // R, U, F permutations
   private permutations = [
-    [
-      0, 7, 2, 15, 4, 5, 6, 21, 16, 8, 3, 11, 12, 13, 14, 23, 17, 9, 1, 19, 20,
-      18, 22, 10,
-    ],
-    [
-      2, 0, 3, 1, 6, 7, 8, 9, 10, 11, 4, 5, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-      21, 22, 23,
-    ],
-    [
-      0, 1, 13, 5, 4, 20, 14, 6, 2, 9, 10, 11, 12, 21, 15, 7, 3, 17, 18, 19, 16,
-      8, 22, 23,
-    ],
+    [0, 7, 2, 15, 4, 5, 6, 21, 16, 8, 3, 11, 12, 13, 14, 23, 17, 9, 1, 19, 20, 18, 22, 10],
+    [2, 0, 3, 1, 6, 7, 8, 9, 10, 11, 4, 5, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+    [0, 1, 13, 5, 4, 20, 14, 6, 2, 9, 10, 11, 12, 21, 15, 7, 3, 17, 18, 19, 16, 8, 22, 23],
   ];
 
   private applyMove(state: string, move: number) {
@@ -111,6 +104,10 @@ export class BFS2x2Solver {
   }
 
   solve(incoming: string[]): string {
+    if (incoming.length !== 24) {
+      throw new SolutionGenerationError('Not enough cubies provided.');
+    }
+
     const scramble = incoming.join('');
 
     const solution = this.run(scramble);

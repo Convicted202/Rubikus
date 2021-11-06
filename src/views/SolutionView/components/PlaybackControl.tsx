@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
-import { View, TouchableOpacity, Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { HapticFeedbackType, withHaptic } from '../../../native/HapticFeedback';
 
 interface IPlaybackControl {
   type: 'play' | 'stop' | 'next' | 'back';
-  onClick: (e: any) => any;
+  onClick: (e?: any) => any;
   inactive?: boolean;
   color?: string;
 }
@@ -34,7 +35,7 @@ export const PlaybackControl: React.FC<IPlaybackControl> = ({ type, onClick, ina
           opacity: inactive ? 0.5 : 1,
         },
       ]}
-      onPress={onClick}
+      onPress={() => withHaptic(HapticFeedbackType.Heavy)(onClick)}
     >
       <Icon name={iconName} size={40} color="#ffffff" />
     </Pressable>

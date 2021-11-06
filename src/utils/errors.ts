@@ -3,7 +3,7 @@ const captureStackTrace = (target: object, constructorOpt?: Function): void => {
   Error.captureStackTrace(target, constructorOpt);
 };
 
-export class FaceParsingException extends Error {
+class GenericError extends Error {
   constructor(message: string) {
     super(message);
     this.name = this.constructor.name;
@@ -12,11 +12,8 @@ export class FaceParsingException extends Error {
   }
 }
 
-export class ColorParsingException extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = this.constructor.name;
-    this.message = message;
-    captureStackTrace(this, this.constructor);
-  }
-}
+export class FaceParsingException extends GenericError {}
+
+export class ColorParsingException extends GenericError {}
+
+export class SolutionGenerationError extends GenericError {}

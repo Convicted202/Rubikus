@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { RubiksCube } from '../cube/Cube';
 import { Loader } from '../views/components/NativeLoader';
 import { Screen } from '../const/screens';
+import { ErrorBoundary } from '../views/ErrorBoundary/ErrorBoundary';
 import { HapticFeedbackType, withHaptic } from '../native/HapticFeedback';
 
 interface IGameViewState {
@@ -35,7 +36,7 @@ export const GameViewsProvider: React.FC = ({ children }) => {
 
   return (
     <GameViewsContext.Provider value={{ view, cube, setCubeData, navigate, setLoading }}>
-      {ScreenView ?? null}
+      <ErrorBoundary>{ScreenView ?? null}</ErrorBoundary>
       <Loader shown={isLoading} />
       {view !== 0 && (
         <View style={styles.buttonsContainer}>

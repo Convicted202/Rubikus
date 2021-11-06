@@ -43,7 +43,6 @@ export const SplashView: ScreenComponent = () => {
       ExampleCube = new RubiksCube(3);
 
       console.log('Rubiks init => ', new Date().getTime() - t);
-      t = new Date().getTime();
     }
 
     animation.current = new SplashScreen(environment.scene, environment.camera, ExampleCube);
